@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import {UserEntity} from "../user/user.entity";
+import {MessageEntity} from "../message/message.entity";
 
 @Module({
   imports: [
@@ -13,8 +15,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         username: configService.getOrThrow('DB_USERNAME'),
         password: configService.getOrThrow('DB_PASSWORD'),
         autoLoadEntities: true,
-        synchronize: configService.getOrThrow('DB_SYNCHRONIZE'),
         ssl: true,
+        migrations: ["dist/migrations/*{.ts,.js}"],
+        entities: [UserEntity, MessageEntity],
         extra: {
           ssl: { rejectUnauthorized: false },
         },

@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { GateawayModule } from './gateaway/gateaway.module';
 import { UserModule } from './user/user.module';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
+import {MessageModule} from "./message/message.module";
+import { ConversationModule } from './conversation/conversation.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true}), GateawayModule, UserModule, DatabaseModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [ConfigModule.forRoot({ isGlobal: true}),
+    GateawayModule, UserModule, DatabaseModule,
+    MessageModule, ConversationModule],
 })
 export class AppModule {}
