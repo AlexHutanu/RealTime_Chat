@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {UserEntity} from "../user/user.entity";
 import {MessageEntity} from "../message/message.entity";
+import {ConversationEntity} from "../conversation/conversation.entity";
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import {MessageEntity} from "../message/message.entity";
         autoLoadEntities: true,
         ssl: true,
         migrations: ["dist/migrations/*{.ts,.js}"],
-        entities: [UserEntity, MessageEntity],
+        entities: [UserEntity, MessageEntity, ConversationEntity],
         extra: {
           ssl: { rejectUnauthorized: false },
         },
