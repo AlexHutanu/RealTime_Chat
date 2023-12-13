@@ -2,6 +2,7 @@ import {Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable
 import {IUser} from "./user.interface";
 import {MessageEntity} from "../message/message.entity";
 import {ConversationEntity} from "../conversation/conversation.entity";
+import {JoinColumn} from "typeorm";
 
 @Entity('users')
 export class UserEntity implements IUser {
@@ -12,15 +13,16 @@ export class UserEntity implements IUser {
     readonly name: string
 
     @Column()
-    readonly email: string;
+    readonly email: string
 
     @Column()
-    readonly password: string;
+    readonly password: string
 
     @ManyToMany(() => ConversationEntity)
     @JoinTable()
-    conversations: ConversationEntity[];
+    conversations: ConversationEntity[]
 
     @OneToMany(() => MessageEntity, message => message.user)
-    message: MessageEntity
+    @JoinColumn()
+    message: MessageEntity[]
 }

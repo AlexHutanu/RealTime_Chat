@@ -25,6 +25,7 @@ export class MyGateaway implements OnModuleInit {
 
     onModuleInit() {
         this.server.on('connection', (socket) => {
+            socket.emit('socketId', socket.id)
             console.log(socket.id)
             console.log('Connected')
         });

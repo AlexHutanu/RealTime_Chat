@@ -17,9 +17,9 @@ export class UserService {
     findOne(id: number) {
         return this.usersRepository.findOneBy({id})
     }
-    async create(@Body() createUserDto: CreateUserDto) {
+     async create(@Body() createUserDto: CreateUserDto) {
         const userEntity = this.usersRepository.create(createUserDto)
-        await this.usersRepository.insert(userEntity)
+         await this.usersRepository.insert(userEntity)
         return userEntity
     }
     update(@Param('id', ParseIntPipe) id: number, @Body() updateUserDto: UpdateUserDto) {

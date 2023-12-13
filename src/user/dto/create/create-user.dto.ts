@@ -10,4 +10,5 @@ export class CreateUserDto {
 
     @IsNotEmpty()
     readonly password: string
+
 }
