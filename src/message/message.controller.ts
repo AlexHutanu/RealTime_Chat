@@ -6,9 +6,13 @@ import {CreateMessageDto} from "./dto/create-message.dto";
 export class MessageController {
     constructor(private readonly messageService: MessageService) {}
 
+    @Get('user/:id')
+    public getMessagesByUser(@Param('id') id: number) {
+        return this.messageService.findMessagesByUser(id)
+    }
     @Get(':id')
     public getMessages(@Param('id') id: number) {
-        return this.messageService.findMessages(id)
+        return this.messageService.findMessage(id)
     }
 
     @Post()

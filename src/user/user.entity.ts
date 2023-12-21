@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany} from "typeorm";
 import {IUser} from "./user.interface";
 import {MessageEntity} from "../message/message.entity";
 import {ConversationEntity} from "../conversation/conversation.entity";
@@ -19,7 +19,6 @@ export class UserEntity implements IUser {
     readonly password: string
 
     @ManyToMany(() => ConversationEntity)
-    @JoinTable()
     conversations: ConversationEntity[]
 
     @OneToMany(() => MessageEntity, message => message.user)

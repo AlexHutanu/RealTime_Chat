@@ -1,8 +1,8 @@
-import {Body, Injectable} from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {ConversationEntity} from "./conversation.entity";
 import {Repository} from "typeorm";
-import {ConversationDto} from "./conversation.dto";
+import {UserEntity} from "../user/user.entity";
 
 @Injectable()
 export class ConversationService {
@@ -11,9 +11,8 @@ export class ConversationService {
         private readonly conversationRepository: Repository<ConversationEntity>
     ) {}
 
-    async create(@Body() conversationDto: ConversationDto) {
-        const conversationEntity = this.conversationRepository.create(conversationDto)
-        await this.conversationRepository.insert(conversationEntity)
-        return conversationEntity
+    async create(users: UserEntity[]): Promise<ConversationEntity> {
+        const newConversation = this.conversationRepository.create({users})
+        return this.conversationRepository.save(newConversation)
     }
 }
